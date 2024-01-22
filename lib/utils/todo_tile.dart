@@ -21,14 +21,14 @@ class TodoTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(12),
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Colors.grey.withOpacity(0.5),
-            //     spreadRadius: 1.2,
-            //     blurRadius: 4,
-            //     offset: Offset(0, 2), // changes position of shadow
-            //   ),
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1.2,
+                blurRadius: 4,
+                offset: const Offset(0, 2), // changes position of shadow
+              ),
+            ],
           ),
           child: Row(
             children: [

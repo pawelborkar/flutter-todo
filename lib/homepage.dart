@@ -35,6 +35,7 @@ class _HomepageState extends State<Homepage> {
           'taskName': userInput,
           'isCompleted': false,
         });
+        _controller.clear();
       });
 
       Navigator.of(context).pop(); // Close the dialog
@@ -75,7 +76,9 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    const Color backgroundColor = Color(0xFF48426D);
+    // const Color backgroundColor = Color(0xFF1E1A38);
+    const Color backgroundColor = Color(0xFF221D45);
+    // const Color backgroundColor = Color(0xFF48426D);
     const Color appBarBackgroundColor = Color(0x4E626262);
 
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/utils/my_button.dart';
 
-class DialogBox extends StatelessWidget {
+class DialogBox extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onSave;
   final VoidCallback onCancel;
@@ -14,6 +14,25 @@ class DialogBox extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _DialogBoxState createState() => _DialogBoxState();
+}
+
+class _DialogBoxState extends State<DialogBox> {
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.amberAccent,
@@ -24,8 +43,9 @@ class DialogBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextField(
-              controller: controller,
-              onSubmitted: (_) => onSave(),
+              controller: widget.controller,
+              focusNode: _focusNode,
+              onSubmitted: (_) => widget.onSave(),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -38,18 +58,26 @@ class DialogBox extends StatelessWidget {
               children: [
                 MyButton(
                   label: "Save",
-                  onPressed: onSave,
+                  onPressed: widget.onSave,
                 ),
                 const SizedBox(width: 8), // Added a small space between buttons
                 MyButton(
                   label: "Cancel",
-                  onPressed: onCancel,
+                  onPressed: widget.onCancel,
                 ),
               ],
             ),
           ],
         ),
       ),
-    );
+    );  
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Focus on the TextField when the dialog is shown
+    _focusNode.requestFocus();
   }
 }
